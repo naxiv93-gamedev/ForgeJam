@@ -59,8 +59,8 @@ func validate_form(form_name: String, form: Dictionary) -> Array:
 
 func load_databases(folder: String) -> void:
 	_folder = folder
-	var dir = DirAccess.new()
-	if dir.open(_folder) == OK:
+	var dir = DirAccess.open(_folder)
+	if dir == OK:
 		dir.list_dir_begin() # TODOConverter3To4 fill missing arguments https://github.com/godotengine/godot/pull/40547
 		var filename = dir.get_next()
 		while filename != "":
@@ -103,8 +103,7 @@ func delete_database(id: String):
 	var db = _databases[id]
 	_databases.erase(id)
 
-	var dir = DirAccess.new()
-	dir.remove(FORMAT_DB_PATH % [_folder, db.id])
+	DirAccess.remove_absolute(FORMAT_DB_PATH % [_folder, db.id])
 
 	emit_signal("changed")
 

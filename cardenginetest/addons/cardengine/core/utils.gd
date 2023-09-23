@@ -29,8 +29,8 @@ func is_valid_for_regex(value: String, regex: String) -> bool:
 
 
 func directory_remove_recursive(path: String) -> bool:
-	var dir = DirAccess.new()
-	if dir.open(path) == OK:
+	var dir = DirAccess.open(path)
+	if dir == OK:
 		dir.list_dir_begin() # TODOConverter3To4 fill missing arguments https://github.com/godotengine/godot/pull/40547
 		var filename = dir.get_next()
 		while filename != "":
@@ -47,14 +47,14 @@ func directory_remove_recursive(path: String) -> bool:
 
 
 func copy_template(src_path: String, dst_path: String, params: Dictionary) -> bool:
-	var src_file = File.new()
-	var dst_file = File.new()
+	var src_file = FileAccess.open(src_path, FileAccess.READ)
+	var dst_file = FileAccess.open(dst_path, FileAccess.WRITE)
 
-	if src_file.open(src_path, File.READ) != OK:
+	if src_file != OK:
 		printerr("Cannot open template file '%'" % src_path)
 		return false
 
-	if dst_file.open(dst_path, File.WRITE) != OK:
+	if dst_file != OK:
 		printerr("Cannot open destination file '%'" % dst_path)
 		return false
 
@@ -79,11 +79,11 @@ func delete_all_children(node: Node) -> void:
 
 func shift_elt_left(arr: Array, idx: int) -> void:
 	var elt = arr[idx]
-	arr.remove(idx)
+	arr.erase(idx)
 	arr.insert(idx-1, elt)
 
 
 func shift_elt_right(arr: Array, idx: int) -> void:
 	var elt = arr[idx]
-	arr.remove(idx)
+	arr.erase(idx)
 	arr.insert(idx+1, elt)

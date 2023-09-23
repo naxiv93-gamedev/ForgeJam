@@ -1,2 +1,6 @@
 res://default_env.tres
 res://main.tscn
+res://addons/cardengine/core/utils.gd
+res://addons/cardengine/database/database_manager.gd
+res://addons/cardengine/container/container_manager.gd
+res://addons/cardengine/animation/animation_manager.gd

@@ -52,8 +52,8 @@ func load_containers(folder: String, private_folder: String, tpl_folder: String)
 	_folder = folder
 	_private_folder = private_folder
 	_tpl_folder = tpl_folder
-	var dir = DirAccess.new()
-	if dir.open(_private_folder) == OK:
+	var dir = DirAccess.open(_private_folder) 
+	if dir == OK:
 		dir.list_dir_begin() # TODOConverter3To4 fill missing arguments https://github.com/godotengine/godot/pull/40547
 		var filename = dir.get_next()
 		while filename != "":
@@ -72,8 +72,8 @@ func containers() -> Dictionary:
 
 
 func create_container(cont: ContainerData) -> void:
-	var dir = DirAccess.new()
-	if dir.open(_private_folder) == OK:
+	var dir = DirAccess.open(_private_folder)
+	if dir == OK:
 		dir.make_dir(cont.id)
 		var private_scene = _write_private_scene(cont)
 		if private_scene == "":
@@ -191,7 +191,7 @@ func _write_metadata(cont: ContainerData) -> void:
 
 
 func _write_private_scene(cont: ContainerData) -> String:
-	var dir = DirAccess.new()
+	var dir = DirAccess.open(FMT_PRIVATE_FOLDER % [_private_folder, cont.id])
 	if !dir.dir_exists(FMT_PRIVATE_FOLDER % [_private_folder, cont.id]):
 		dir.make_dir_recursive(FMT_PRIVATE_FOLDER % [_private_folder, cont.id])
 
@@ -272,7 +272,7 @@ func _write_private_scene(cont: ContainerData) -> String:
 
 
 func _write_public_scene(cont: ContainerData, private_scene: String) -> void:
-	var dir = DirAccess.new()
+	var dir = DirAccess.open(FMT_IMPL_FOLDER % [_folder, cont.id])
 	if dir.dir_exists(FMT_IMPL_FOLDER % [_folder, cont.id]):
 		return
 	else:

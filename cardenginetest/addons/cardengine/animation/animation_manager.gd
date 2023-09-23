@@ -48,8 +48,8 @@ func validate_form(form_name: String, form: Dictionary) -> Array:
 func load_animations(anim_folder: String) -> void:
 	_folder = anim_folder
 
-	var dir = DirAccess.new()
-	if dir.open(_folder) == OK:
+	var dir = DirAccess.open(_folder)
+	if dir == OK:
 		dir.list_dir_begin() # TODOConverter3To4 fill missing arguments https://github.com/godotengine/godot/pull/40547
 		var filename = dir.get_next()
 		while filename != "":
@@ -92,7 +92,7 @@ func delete_animation(id: String):
 	var anim = _animations[id]
 	_animations.erase(id)
 
-	var dir = DirAccess.new()
+	var dir = DirAccess.open(FORMAT_ANIM_PATH % [_folder, anim.id])
 	dir.remove(FORMAT_ANIM_PATH % [_folder, anim.id])
 
 	emit_signal("changed")
