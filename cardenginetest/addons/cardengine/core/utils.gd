@@ -48,7 +48,11 @@ func directory_remove_recursive(path: String) -> bool:
 
 func copy_template(src_path: String, dst_path: String, params: Dictionary) -> bool:
 	var src_file = FileAccess.open(src_path, FileAccess.READ)
+<<<<<<< Updated upstream
 	var dst_file = FileAccess.open(dst_path, FileAccess.WRITE)
+=======
+	var dst_file = FileAccess.open(dst_path, FileAccess.READ)
+>>>>>>> Stashed changes
 
 	if src_file != OK:
 		printerr("Cannot open template file '%'" % src_path)

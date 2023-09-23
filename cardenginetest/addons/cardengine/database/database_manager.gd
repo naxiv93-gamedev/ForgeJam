@@ -59,7 +59,7 @@ func validate_form(form_name: String, form: Dictionary) -> Array:
 
 func load_databases(folder: String) -> void:
 	_folder = folder
-	var dir = DirAccess.open(_folder)
+	var dir = DirAccess.open(folder)
 	if dir == OK:
 		dir.list_dir_begin() # TODOConverter3To4 fill missing arguments https://github.com/godotengine/godot/pull/40547
 		var filename = dir.get_next()

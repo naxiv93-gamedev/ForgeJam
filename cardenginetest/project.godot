@@ -37,7 +37,7 @@ window/size/viewport_height=720
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/cardengine/plugin.cfg")
+enabled=PackedStringArray()
 
 [gui]
 
@@ -45,6 +45,7 @@ timers/tooltip_delay_sec=0.1
 
 [rendering]
 
+renderer/rendering_method="mobile"
 environment/defaults/default_clear_color=Color(0, 0, 0, 1)
 environment/defaults/default_environment="res://default_env.tres"
 quality/filters/anisotropic_filter_level=16
